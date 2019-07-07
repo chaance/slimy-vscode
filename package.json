@@ -7,7 +7,7 @@
         "type": "git",
         "url": "https://github.com/chancestrickland/slimy-theme"
     },
-    "version": "0.1.5",
+    "version": "0.1.6",
     "engines": {
         "vscode": "^1.36.0"
     },
