@@ -1,0 +1,23 @@
+/* Source: https://github.com/sdras/night-owl-vscode-theme/blob/master/demo/css.css */
+.someClass {
+  font-family: serif;
+}
+
+#someID {
+  background: yellow;
+}
+
+main {
+  margin-top: 20px;
+}
+
+input[type="submit"],
+button {
+  color: #0ffec4;
+}
+
+h1 > a {
+  text-decoration: none;
+  transform: translate3d(0, 20px, 10%);
+  background: linear-gradient(to bottom, red, orange);
+}

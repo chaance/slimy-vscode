@@ -1,0 +1,39 @@
+// Source: https://github.com/sdras/night-owl-vscode-theme/blob/master/demo/css.css
+/* inline comment */
+
+/// Do a thing mixin
+/// @param {String} $param - How awesome is it?
+/// @param {Number} $amount - Pad the awesome
+@mixin do-a-thing($param: awesome, $amount: 50px)
+  padding: $amount 0
+  @if $param == cool
+    font-weight: 300
+  @else
+    font-weight: 800
+
+.someClass
+  font-family: serif
+
+  &__child
+    font-family: "nuno sans", sans-serif
+    font-weight: $bold
+    @include make-bigger
+    @include make-color(blood)
+
+  &--extended
+    font-size: 120%
+
+#someID
+  background: yellow
+
+main
+  margin-top: 20px
+
+input[type="submit"],
+button
+  color: #0ffec4
+
+h1 > a
+  text-decoration: none
+  transform: translate3d(0, 20px, 10%)
+  background: linear-gradient(to bottom, red, orange)

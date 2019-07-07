@@ -1,0 +1,9 @@
+node_modules
+*.DS_Store
+vendor
+logs
+*.log
+npm-debug.log*
+pids
+*.pid
+coverage
