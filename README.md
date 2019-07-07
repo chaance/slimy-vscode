@@ -5,7 +5,7 @@
 
 A dark, slimy theme for your editor. Inspired by [smlombardi](https://marketplace.visualstudio.com/publishers/smlombardi)'s [Slime Theme](https://github.com/smlombardi/theme-slime). Example files for testing borrowed liberally from [Night OWl](https://github.com/sdras/night-owl-vscode-theme).
 
-![Mockup of the theme with a JavaScript editor](assets/screen@2x.png)
+![Mockup of the theme with a JavaScript editor](assets/screen.png)
 
 ## PSA
 This is my first VS Code theme, so if anything looks weird feel free to file and issue or submit a PR.
