@@ -269,7 +269,7 @@
     "statusBarItem.prominentHoverBackground": "#f0f0f000",
 
     // Title bar colors
-    "titleBar.activeBackground": "#181d1d",
+    "titleBar.activeBackground": "#242b2b",
     "titleBar.activeForeground": "#f0f0f0",
     "titleBar.inactiveBackground": "#242b2b",
     "titleBar.inactiveForeground": "#939d9f",
