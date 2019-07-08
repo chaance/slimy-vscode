@@ -1,3 +1,4 @@
+
 <?php
 // source: https://github.com/sdras/night-owl-vscode-theme/blob/master/demo/php.php
 class HelloWorldTest extends PHPUnit_Framework_TestCase
@@ -11,7 +12,7 @@ class HelloWorldTest extends PHPUnit_Framework_TestCase
      * A nonsensical function.
      * Learn more: https://thisdoesnotworkprobably.com
      *
-     * @param  string  $str
+     * @param  string $str
      * @param \My_Class $cls
      * @param  integer $int
      * @param  float   $flt
@@ -50,3 +51,6 @@ class HelloWorldTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Bar', $helloWorld->what());
     }
 }
+
+
+echo 'Hello, world';

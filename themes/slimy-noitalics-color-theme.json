@@ -1,5 +1,5 @@
 {
-  "name": "Slimy",
+  "name": "Slimy (no italics)",
   "type": "dark",
   "colors": {
     // https://code.visualstudio.com/api/references/theme-color
@@ -403,7 +403,6 @@
       ],
       "settings": {
         "foreground": "#d6c05dcc",
-        "fontStyle": "italic"
       }
     },
     {
@@ -411,7 +410,6 @@
       "scope": "markup.deleted.diff",
       "settings": {
         "foreground": "#b64e4ecc",
-        "fontStyle": "italic"
       }
     },
     {
@@ -419,7 +417,6 @@
       "scope": "markup.inserted.diff",
       "settings": {
         "foreground": "#91b147cc",
-        "fontStyle": "italic"
       }
     },
     {
@@ -817,7 +814,6 @@
       ],
       "settings": {
         "foreground": "#ffd188",
-        "fontStyle": "italic",
       }
     },
     {
@@ -859,7 +855,7 @@
         "keyword.other.new",
       ],
       "settings": {
-        "fontStyle": "italic",
+        // "fontStyle": "italic",
       }
     },
     {
@@ -868,7 +864,7 @@
         "support.function.construct.output"
       ],
       "settings": {
-        "fontStyle": "italic",
+        // "fontStyle": "italic",
       }
     },
     {
@@ -897,7 +893,6 @@
       ],
       "settings": {
         "foreground": "#cfd89a",
-        "fontStyle": "italic",
       }
     },
     {

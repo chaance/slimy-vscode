@@ -1,4 +1,3 @@
-// source: https://github.com/sdras/night-owl-vscode-theme/blob/master/demo/js.js
 'use strict';
 import React from 'react';
 
@@ -11,17 +10,14 @@ let popper = function() {
 let fake = new FakeClass();
 let str = 'Fake news';
 
-let topper = () => 'topper';
+type TTpo = string;
+interface IPop { pop: string; }
+
+let topper = (cop: TTpo) => 'topper';
 
 function stopper() {
   return 'stopper';
 }
-
-let cop = str => `Freeze! ${str}`;
-
-let jsxTest = () => <span>Testing JSX</span>;
-
-cop`Drop the weapon! ${cop`Do it now! ${() => <span>This is nonsense</span>}`}`;
 
 class Sale extends FakeClass {
   constructor(price) {
@@ -32,6 +28,7 @@ class Sale extends FakeClass {
   decorate(decorator) {
     if (!Sale[decorator]) throw new Error(`decorator not exist: ${decorator}`);
     this.decoratorsList.push(Sale[decorator]);
+    let fake = new FakeClass();
   }
 
   getPrice() {
