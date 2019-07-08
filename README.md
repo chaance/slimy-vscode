@@ -8,4 +8,4 @@ A dark, slimy theme for your editor. Inspired by [smlombardi](https://marketplac
 ![Mockup of the theme with a TypeScript React editor](assets/screen.png)
 
 ## PSA
-This is my first VS Code ***theme***, so if anything looks weird feel free to file and issue or submit a PR.
+This is my first VS Code theme, so if anything looks weird feel free to file and issue or submit a PR.
