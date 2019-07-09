@@ -664,6 +664,10 @@
         "block.punctuation",
         "keyword.operator.css",
         "meta.at-rule.media.scss",
+        "meta.delimiter",
+        "meta.delimiter.comma",
+        "meta.function meta.delimiter.comma",
+        "meta.function punctuation.separator.comma",
         "meta.function-call.php punctuation",
         "meta.structure.dictionary.json support.type.property-name.json punctuation.support.type.property-name.begin.json",
         "meta.structure.dictionary.json support.type.property-name.json punctuation.support.type.property-name.end.json",
@@ -988,6 +992,7 @@
     {
       "name": "Object",
       "scope": [
+        "support.type.object",
         "support.variable.object.process.js",
         "support.variable.object.process.jsx",
         "support.variable.object.process.ts",
@@ -999,6 +1004,15 @@
       ],
       "settings": {
         "foreground": "#AEC199"
+      }
+    },
+    {
+      "name": "DOM Object",
+      "scope": [
+        "support.type.object.dom",
+      ],
+      "settings": {
+        "foreground": "#d6c05d"
       }
     },
     {
