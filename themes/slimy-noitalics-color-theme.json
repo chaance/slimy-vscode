@@ -804,6 +804,7 @@
         // Language-specific overrides
         "meta.function-call entity.name.function.ts",
         "meta.function-call entity.name.function.tsx",
+        "meta.function-call.php support.function",
         "meta.function-call.python meta.function-call.generic.python",
         "meta.function-call.python support.function.builtin.python",
         "meta.function-call.generic.python",
