@@ -166,11 +166,11 @@
     "editorBracketMatch.background": "#161919",
     "editorBracketMatch.border": "#5c6563EE",
     "editorOverviewRuler.border": "#f0f0f000",
-    "editorOverviewRuler.findMatchForeground": "#a8df5a",
+    "editorOverviewRuler.findMatchForeground": "#a8df5ad0",
     // editorOverviewRuler.rangeHighlightForeground
     // editorOverviewRuler.selectionHighlightForeground
-    "editorOverviewRuler.wordHighlightForeground": "#a8df5a",
-    "editorOverviewRuler.wordHighlightStrongForeground": "#a8df5a",
+    "editorOverviewRuler.wordHighlightForeground": "#a8df5a60",
+    "editorOverviewRuler.wordHighlightStrongForeground": "#a8df5a60",
     "editorOverviewRuler.modifiedForeground": "#d6c05d50",
     "editorOverviewRuler.addedForeground": "#91b147",
     "editorOverviewRuler.deletedForeground": "#d6c05d80",
@@ -194,9 +194,9 @@
     // editorGutter.deletedBackground
 
     // Diff editor colors
-    "diffEditor.insertedTextBackground": "#91b14760",
+    "diffEditor.insertedTextBackground": "#91b1471d",
     "diffEditor.insertedTextBorder": "#f0f0f000",
-    "diffEditor.removedTextBackground": "#b64e4e60",
+    "diffEditor.removedTextBackground": "#b64e4e3c",
     "diffEditor.removedTextBorder": "#f0f0f000",
     "diffEditor.border": "#f0f0f000",
 
@@ -235,10 +235,10 @@
     // peekViewTitleLabel.foreground
 
     // Merge conflicts
-    "merge.currentHeaderBackground": "#4d949298",
-    "merge.currentContentBackground": "#4d949260",
-    "merge.incomingHeaderBackground": "#497aa898",
-    "merge.incomingContentBackground": "#497aa860",
+    "merge.currentHeaderBackground": "#4d949260",
+    "merge.currentContentBackground": "#4d94923f",
+    "merge.incomingHeaderBackground": "#497aa860",
+    "merge.incomingContentBackground": "#497aa83f",
     "merge.border": "#f0f0f000",
     // merge.commonContentBackground
     // merge.commonHeaderBackground
@@ -389,8 +389,8 @@
   "tokenColors": [
     {
       "name": "Globals",
+      "scope": [],
       "settings": {
-        "background": "#242b2b",
         "foreground": "#e0e0e0"
       }
     },
