@@ -83,7 +83,7 @@
     // Activity Bar
     "activityBar.background": "#121515",
     // activityBar.dropBackground
-    "activityBar.foreground": "#616b67",
+    "activityBar.foreground": "#abbab4",
     // activityBar.inactiveForeground
     "activityBar.border": "#f0f0f000",
     "activityBarBadge.background": "#6c8532",
@@ -95,7 +95,7 @@
     "sideBar.border": "#f0f0f000",
     // sideBar.dropBackground
     "sideBarTitle.foreground": "#f0f0f0",
-    "sideBarSectionHeader.background": "#353d3a",
+    "sideBarSectionHeader.background": "#1f2323",
     // sideBarSectionHeader.foreground
     "sideBarSectionHeader.border": "#f0f0f000",
 
@@ -205,7 +205,7 @@
     "editorWidget.resizeBorder": "#f0f0f000",
     "editorSuggestWidget.background": "#181d1d",
     "editorSuggestWidget.border": "#f0f0f000",
-    "editorSuggestWidget.foreground": "#939d9f",
+    "editorSuggestWidget.foreground": "#bfccce",
     "editorSuggestWidget.highlightForeground": "#f0f0f0",
     "editorSuggestWidget.selectedBackground": "#405c50",
     "editorHoverWidget.background": "#181d1d",
@@ -255,12 +255,12 @@
 
     // Status Bar colors
     "statusBar.background": "#121515",
-    "statusBar.foreground": "#939d9f",
+    "statusBar.foreground": "#bfccce",
     "statusBar.border": "#f0f0f000",
     "statusBar.debuggingBackground": "#9876aa",
     "statusBar.debuggingForeground": "#f0f0f0",
     "statusBar.debuggingBorder": "#f0f0f000",
-    "statusBar.noFolderForeground": "#939d9f",
+    "statusBar.noFolderForeground": "#bfccce",
     "statusBar.noFolderBackground": "#121515",
     "statusBar.noFolderBorder": "#f0f0f000",
     "statusBarItem.activeBackground": "#f0f0f000",
@@ -280,7 +280,7 @@
     "menubar.selectionForeground": "#f0f0f0",
     // menubar.selectionBackground
     "menubar.selectionBorder": "#f0f0f000",
-    "menu.foreground": "#939d9f",
+    "menu.foreground": "#bfccce",
     "menu.background": "#181d1d",
     "menu.selectionForeground": "#f0f0f0",
     // menu.selectionBackground
@@ -289,7 +289,7 @@
 
     // Notification colors
     "notificationCenter.border": "#f0f0f000",
-    "notificationCenterHeader.foreground": "#939d9f",
+    "notificationCenterHeader.foreground": "#bfccce",
     "notificationCenterHeader.background": "#181d1d",
     "notificationToast.border": "#f0f0f000",
     "notifications.foreground": "#f0f0f0",
@@ -308,12 +308,12 @@
 
     // Quick input colors
     "quickInput.background": "#181d1d",
-    "quickInput.foreground": "#939d9f",
+    "quickInput.foreground": "#bfccce",
 
     // Integrated terminal colors
     "terminal.background": "#121515",
     "terminal.border": "#f0f0f000",
-    "terminal.foreground": "#939d9f",
+    "terminal.foreground": "#bfccce",
     "terminal.ansiBlack": "#666666",
     "terminal.ansiRed": "#cd6564",
     "terminal.ansiGreen": "#8fa360",
@@ -347,13 +347,13 @@
     // walkThrough.embeddedEditorBackground
 
     // Git colors
-    "gitDecoration.addedResourceForeground": "#939d9f",
-    "gitDecoration.modifiedResourceForeground": "#939d9f",
-    "gitDecoration.deletedResourceForeground": "#939d9f",
-    "gitDecoration.untrackedResourceForeground": "#939d9f",
-    "gitDecoration.ignoredResourceForeground": "#939d9f98",
-    "gitDecoration.conflictingResourceForeground": "#939d9f",
-    "gitDecoration.submoduleResourceForeground": "#939d9f",
+    "gitDecoration.addedResourceForeground": "#bfccce",
+    "gitDecoration.modifiedResourceForeground": "#bfccce",
+    "gitDecoration.deletedResourceForeground": "#bfccce",
+    "gitDecoration.untrackedResourceForeground": "#bfccce",
+    "gitDecoration.ignoredResourceForeground": "#bfccce98",
+    "gitDecoration.conflictingResourceForeground": "#bfccce",
+    "gitDecoration.submoduleResourceForeground": "#bfccce",
 
     // Settings Editor colors
     // settings.headerForeground
@@ -363,7 +363,7 @@
     // settings.dropdownBorder
     // settings.dropdownListBorder
     "settings.checkboxBackground": "#181d1d",
-    "settings.checkboxForeground": "#939d9f",
+    "settings.checkboxForeground": "#bfccce",
     "settings.checkboxBorder": "#f0f0f000",
     // settings.textInputBackground
     // settings.textInputForeground
@@ -373,10 +373,10 @@
     // settings.numberInputBorder
 
     // Breadcrumbs
-    "breadcrumb.foreground": "#939d9f",
+    "breadcrumb.foreground": "#bfccce",
     "breadcrumb.background": "#121515",
     "breadcrumb.focusForeground": "#f0f0f0",
-    "breadcrumb.activeSelectionForeground": "#939d9f"
+    "breadcrumb.activeSelectionForeground": "#bfccce"
     // breadcrumbPicker.background
 
     // Snippets
@@ -818,7 +818,7 @@
         "punctuation.definition.tag.begin.html source.js"
       ],
       "settings": {
-        "foreground": "#939d9f"
+        "foreground": "#bfccce"
       }
     },
     {
