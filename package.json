@@ -3,9 +3,16 @@
   "displayName": "Slimy",
   "description": "A dark, slimy theme for your editor.",
   "publisher": "chancestrickland",
+  "scripts": {
+    "package": "vsce package",
+    "pub": "vsce publish"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/chancestrickland/slimy-theme"
+  },
+  "devDependencies": {
+    "vsce": "^1.69.0"
   },
   "version": "0.3.0",
   "engines": {
