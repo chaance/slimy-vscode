@@ -1,37 +1,37 @@
 {
-    "name": "slimy-theme",
-    "displayName": "Slimy",
-    "description": "A dark, slimy theme for your editor.",
-    "publisher": "chancestrickland",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/chancestrickland/slimy-theme"
-    },
-    "version": "0.3.0",
-    "engines": {
-        "vscode": "^1.36.0"
-    },
-    "categories": [
-        "Themes"
-    ],
-    "icon": "icon.png",
-    "contributes": {
-        "themes": [
-            {
-                "label": "Slimy",
-                "uiTheme": "vs-dark",
-                "path": "./themes/slimy-color-theme.json"
-            },
-            {
-                "label": "Slimy (no italics)",
-                "uiTheme": "vs-dark",
-                "path": "./themes/slimy-noitalics-color-theme.json"
-            },
-            {
-                "label": "Slimy (high-contrast)",
-                "uiTheme": "vs-dark",
-                "path": "./themes/slimy-high-contrast-color-theme.json"
-            }
-        ]
-    }
+  "name": "slimy-theme",
+  "displayName": "Slimy",
+  "description": "A dark, slimy theme for your editor.",
+  "publisher": "chancestrickland",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chancestrickland/slimy-theme"
+  },
+  "version": "0.3.0",
+  "engines": {
+    "vscode": "^1.36.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "icon": "icon.png",
+  "contributes": {
+    "themes": [
+      {
+        "label": "Slimy",
+        "uiTheme": "vs-dark",
+        "path": "./themes/slimy-color-theme.json"
+      },
+      {
+        "label": "Slimy (no italics)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/slimy-noitalics-color-theme.json"
+      },
+      {
+        "label": "Slimy (high-contrast)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/slimy-high-contrast-color-theme.json"
+      }
+    ]
+  }
 }
