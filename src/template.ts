@@ -1,82 +1,17 @@
 import slimy, { Color } from "slimy";
-import { getThemeFileName } from "./utils";
-
-export type SchemeName = keyof typeof slimy;
+import { ColorTheme, SchemeName } from "./types";
+import { getThemeName, getThemeType, isThemeHighContrast } from "./utils";
 
 const transparent = "#f0f0f000";
 
 const WCAG_RATIO_AA = 4.5;
 const WCAG_RATIO_AAA = 7.1;
 
-type ColorTheme = {
-  name: string;
-  type: "light" | "dark";
-  colors: Record<string, string>;
-  tokenColors: {
-    name?: string;
-    scope?: string | string[];
-    settings: {
-      background?: string;
-      foreground?: string;
-      fontStyle?:
-        | "italic"
-        | "bold"
-        | "underline"
-        | "bold italic"
-        | "bold italic underline"
-        | "bold underline"
-        | "italic underline"
-        | "";
-    };
-  }[];
-  semanticHighlighting: boolean;
-  semanticTokenColors?: Record<string, string>;
-};
-
-export function isThemeHighContrast(variant: SchemeName) {
-  return variant.toLowerCase().includes("contrast");
-}
-
-export function getThemeType(variant: SchemeName) {
-  return variant.toLowerCase().includes("light") ? "light" : "dark";
-}
-
-export function getThemeName(variant: SchemeName, italics: boolean) {
-  const highContrast = isThemeHighContrast(variant);
-  const type = getThemeType(variant);
-  return joinExisting(
-    [
-      "Slimy",
-      wrapExisting(
-        joinExisting(
-          [
-            type === "light" && "light",
-            highContrast && "high-contrast",
-            !italics && "no italics",
-          ],
-          ", "
-        ),
-        ["(", ")"]
-      ),
-    ],
-    " "
-  );
-}
-
-export function getThemeMeta(variant: SchemeName, italics: boolean) {
-  return {
-    label: getThemeName(variant, italics),
-    uiTheme: getThemeType(variant) === "dark" ? "vs-dark" : "vs",
-    path: `./themes/${getThemeFileName(variant, italics)}`,
-  };
-}
-
 export function template(variant: SchemeName, italics: boolean): ColorTheme {
   const scheme = slimy[variant];
+  const name = getThemeName(variant, italics);
   const type = getThemeType(variant);
   const highContrast = isThemeHighContrast(variant);
-
-  const name = getThemeName(variant, italics);
 
   // A few helpers to check contrast ratios for common BG/FG checks
   const prefers = highContrast ? preferredColorContrast : preferredColor;
@@ -145,10 +80,13 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
     type,
     // https://code.visualstudio.com/api/references/theme-color
     colors: {
-      ...(highContrast ? {
-        "contrastActiveBorder": scheme.common.accent.hex(),
-        "contrastBorder": scheme.common.accent.alpha(0.5).hex(),
-      } : {}),
+      ...(highContrast
+        ? {
+            contrastActiveBorder:
+              type === "light" ? scheme.common.accent.hex() : undefined,
+            contrastBorder: scheme.common.accent.alpha(0.5).hex(),
+          }
+        : {}),
 
       // Base colors
       // @link https://code.visualstudio.com/api/references/theme-color#base-colors
@@ -373,8 +311,12 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       // highlighted.
       "editor.selectionBackground": selectionBackground.hex(),
       "editor.selectionForeground": selectionForeground.hex(),
-      "editor.inactiveSelectionBackground": scheme.ui.selection.inactive.hex(),
-      "editor.selectionHighlightBackground": scheme.ui.selection.inactive.hex(),
+      "editor.inactiveSelectionBackground": scheme.ui.selection.inactive
+        .alpha(0.5)
+        .hex(),
+      "editor.selectionHighlightBackground": scheme.ui.selection.inactive
+        .alpha(0.3)
+        .hex(),
       "editor.selectionHighlightBorder":
         scheme.ui.selection.border?.hex() || transparent,
 
@@ -398,7 +340,9 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         .alpha(0.05)
         .hex(),
       "editor.findMatchHighlightBorder": transparent,
-      "editor.findRangeHighlightBackground": scheme.ui.selection.inactive.hex(),
+      "editor.findRangeHighlightBackground": scheme.ui.selection.inactive
+        .alpha(0.3)
+        .hex(),
       "editor.findRangeHighlightBorder": transparent,
 
       // 'searchEditor.findMatchBackground': '',
@@ -892,16 +836,21 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
     tokenColors: [
       {
-        name: "Globals",
         settings: {
-          background: scheme.common.bg.hex(),
+          // background: scheme.common.bg.hex(),
           foreground: scheme.common.fg.hex(),
+        },
+      },
+      {
+        name: "Groovy",
+        scope: ["meta.embedded", "source.groovy.embedded"],
+        settings: {
+          foreground: scheme.common.fg.brighten(0.2).hex(),
         },
       },
       {
         name: "Diffs",
         scope: [
-          "meta.diff.header",
           "meta.diff.header.git",
           "meta.diff.header.from-file",
           "meta.diff.header.to-file",
@@ -912,44 +861,6 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         },
       },
       {
-        name: "Changed",
-        scope: ["markup.changed"],
-        settings: {
-          foreground: scheme.vcs.modified.hex(),
-          fontStyle: italics ? "italic" : undefined,
-        },
-      },
-      {
-        name: "Deleted",
-        scope: ["markup.deleted"],
-        settings: {
-          foreground: scheme.vcs.removed.hex(),
-          fontStyle: italics ? "italic" : undefined,
-        },
-      },
-      {
-        name: "Inserted",
-        scope: ["markup.inserted"],
-        settings: {
-          foreground: scheme.vcs.added.hex(),
-          fontStyle: italics ? "italic" : undefined,
-        },
-      },
-      {
-        name: "Markup Strike",
-        scope: ["markup.strike"],
-        settings: {
-          foreground: scheme.syntax.special.hex(),
-        },
-      },
-      {
-        name: "Markup Table",
-        scope: ["markup.table"],
-        settings: {
-          foreground: scheme.syntax.tag.hex(),
-        },
-      },
-      {
         name: "Comments",
         scope: ["comment", "punctuation.definition.comment"],
         settings: {
@@ -957,26 +868,13 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         },
       },
       {
-        name: "Strings",
-        scope: [
-          "string",
-          "string.quoted",
-          "string.quoted.single.js",
-          "string.quoted.single.ts",
-          "invalid.illegal.bad-ampersand.html",
-          "string.quoted.double.html invalid.illegal.bad-ampersand.html",
-          "string.quoted.single.html invalid.illegal.bad-ampersand.html",
-        ],
-        settings: {
-          foreground: scheme.syntax.string.hex(),
-        },
-      },
-      {
         name: "Text",
         scope: [
           "text",
-          "text.html.basic",
           "source",
+
+          // Language-specific overrides
+          "text.html.basic",
           "meta.tag.jsx",
           "meta.tag.tsx",
           "meta.jsx.children",
@@ -988,6 +886,29 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         ],
         settings: {
           foreground: scheme.common.fg.hex(),
+        },
+      },
+      {
+        name: "Strings",
+        scope: [
+          "string",
+          "string.quoted",
+
+          // Language-specific overrides
+          "invalid.illegal.bad-ampersand.html",
+          ...["js", "ts", "tsx", "html"].reduce<string[]>((prev, ext) => {
+            // Addresses weird colors for some invalid characters
+            return [
+              ...prev,
+              `string.quoted.single.${ext}`,
+              `string.quoted.double.${ext}`,
+              `string.quoted.single.${ext} invalid.illegal.bad-ampersand.html`,
+              `string.quoted.double.${ext} invalid.illegal.bad-ampersand.html`,
+            ];
+          }, []),
+        ],
+        settings: {
+          foreground: scheme.syntax.string.hex(),
         },
       },
       {
@@ -1003,6 +924,9 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "constant.length.units",
           "constant.percentage.units",
           "constant.angle.units",
+          "keyword.other.unit",
+
+          // Language-specific overrides
           "meta.at-rule.keyword.other.unit.media",
           "keyword.other.unit.css",
           "keyword.other.unit.sass",
@@ -1016,6 +940,8 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "Boolean",
         scope: [
           "constant.language.boolean",
+
+          // Language-specific overrides
           "meta.tag.any.html.string.quoted.double.embedded.line.php.source.constant.language.inline",
           "meta.embedded.line.php.source.constant.language",
         ],
@@ -1092,10 +1018,12 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "constant",
           "constant.language",
           "punctuation.definition.constant",
-          "constant.language.python",
           "variable.other.constant.property",
           "constant.other",
           "support.constant",
+
+          // Language-specific overrides
+          "constant.language.python",
         ],
         settings: {
           foreground: scheme.syntax.constant.hex(),
@@ -1109,7 +1037,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         },
       },
       {
-        name: "Support Constant Math",
+        name: "Math constant",
         scope: "support.constant.math",
         settings: {
           foreground: scheme.common.fg.hex(),
@@ -1127,12 +1055,14 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         scope: [
           "support.type",
           "support.class",
-          "support.class.php",
           "entity.name.class",
           "entity.name.type.class",
           "entity.name.type.instance",
           "meta.class",
           "meta.class entity.name.type.class",
+
+          // Language-specific overrides
+          "support.class.php",
           "meta.class entity.name.type.class.tsx",
           "source.go storage.type",
           "new.expr.ts entity.name.type.ts",
@@ -1286,7 +1216,12 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       },
       {
         name: "Function keyword",
-        scope: ["storage.type.function"],
+        scope: [
+          "storage.type.function",
+
+          // Language-specific overrides
+          "keyword.function.go",
+        ],
         settings: {
           foreground: scheme.chalk.orange.hex(),
           fontStyle: italics ? "italic" : undefined,
@@ -1344,6 +1279,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "string.quasi.js entity.name.tag.js",
           "support.function.css",
           "support.function.go",
+          "source.go meta.function-call.go",
           "variable.language.super",
         ],
         settings: {
@@ -1390,6 +1326,20 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         scope: ["keyword.operator.new", "keyword.other.new"],
         settings: {
           fontStyle: italics ? "italic" : undefined,
+          foreground: scheme.common.ui.brighten(0.6).fade(0.3).hex(),
+        },
+      },
+      {
+        name: "Keyword `typeof`, `instanceof`",
+        scope: [
+          "keyword.operator.instanceof",
+          "keyword.operator.typeof",
+          "keyword.operator.expression.instanceof",
+          "keyword.operator.expression.typeof",
+        ],
+        settings: {
+          fontStyle: italics ? "italic" : undefined,
+          foreground: scheme.common.ui.brighten(0.6).fade(0.3).hex(),
         },
       },
       {
@@ -1409,10 +1359,15 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "keyword.control.from",
           "storage.type.extends",
           "storage.type.function.arrow",
+
+          // Language-specific overrides
           "storage.type.function.arrow.js",
           "storage.type.function.arrow.jsx",
           "storage.type.function.arrow.ts",
           "storage.type.function.arrow.tsx",
+          "keyword.import.go",
+          "keyword.export.go",
+          "keyword.package.go",
         ],
         settings: {
           foreground: syntaxKeywordControl.hex(),
@@ -1424,6 +1379,8 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         scope: [
           "storage",
           "meta.var.expr",
+
+          // Language-specific overrides
           "meta.class meta.method.declaration meta.var.expr storage.type.js",
           "storage.type.property.js",
           "storage.type.property.jsx",
@@ -1443,6 +1400,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "source.java storage.type",
           "source.haskell storage.type",
           "source.c storage.type",
+          "keyword.type.go",
         ],
         settings: {
           foreground: scheme.chalk.orange[brightenIfDark(type)](0.3)
@@ -1474,26 +1432,26 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "Variables",
         scope: [
           "entity.name.variable",
-          "punctuation.definition.variable.php",
-          "source.python variable.language.special",
           "support.variable",
           "variable",
           "variable.member",
           "variable.language",
-          "variable.language.this.php",
-          "variable.language.this.php punctuation.definition.variable",
           "variable.other",
           "variable.other.event",
-          "variable.other.php",
           "variable.other.global",
-          "variable.other.global.php",
-          "variable.other.global.php punctuation.definition.variable",
           "variable.other.property",
-          "variable.other.property.php",
           "variable.other.readwrite",
           "variable.other.readwrite.alias",
-          "variable.other.readwrite.alias",
-          "variable.other.readwrite.alias",
+
+          // Language-specific overrides
+          "punctuation.definition.variable.php",
+          "source.python variable.language.special",
+          "variable.language.this.php",
+          "variable.language.this.php punctuation.definition.variable",
+          "variable.other.php",
+          "variable.other.global.php",
+          "variable.other.global.php punctuation.definition.variable",
+          "variable.other.property.php",
           "variable.other.readwrite.alias.ts",
           "variable.other.readwrite.alias.tsx",
           "variable.other.readwrite.ts",
@@ -1529,6 +1487,8 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "Object",
         scope: [
           "support.type.object",
+
+          // Language-specific overrides
           "support.variable.object.process.js",
           "support.variable.object.process.jsx",
           "support.variable.object.process.ts",
@@ -1554,7 +1514,6 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       {
         name: "Object keys",
         scope: [
-          "meta.object-literal.key",
           "meta.object-literal.key",
           "meta.object.member",
           "meta.object.member.object-literal.key",
@@ -1658,8 +1617,10 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "entity.name.namespace",
           "entity.name.type.namespace",
           "meta.namespace",
-          "meta.namespace.declaration.ts",
           "support.other.namespace",
+
+          // Language-specific overrides
+          "meta.namespace.declaration.ts",
         ],
         settings: {
           foreground: syntaxNamespace.hex(),
@@ -1698,6 +1659,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       {
         name: "Entity names in code documentations",
         scope: [
+          // Language-specific overrides
           "entity.name.type.instance.jsdoc",
           "entity.name.type.instance.phpdoc",
           "entity.name.type.instance.sassdoc",
@@ -1712,16 +1674,223 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       {
         name: "Other Variables in Code Documentations",
         scope: [
+          "comment.block.documentation punctuation.definition",
+          "comment.block.documentation storage.type",
+
+          // Language-specific overrides
           "variable.other.jsdoc",
           "variable.other.phpdoc",
           "variable.other.sassdoc",
-          "comment.block.documentation punctuation.definition",
-          "comment.block.documentation storage.type",
         ],
         settings: {
           foreground: scheme.syntax.variable[darkenIfDark(type)](0.2)
             .fade(0.3)
             .hex(),
+        },
+      },
+
+      // Markup
+      {
+        name: "Markup changed",
+        scope: ["markup.changed"],
+        settings: {
+          foreground: scheme.vcs.modified.hex(),
+          fontStyle: italics ? "italic" : undefined,
+        },
+      },
+      {
+        name: "Markup deleted",
+        scope: ["markup.deleted"],
+        settings: {
+          foreground: scheme.vcs.removed.hex(),
+          fontStyle: italics ? "italic" : undefined,
+        },
+      },
+      {
+        name: "Markup inserted",
+        scope: ["markup.inserted"],
+        settings: {
+          foreground: scheme.vcs.added.hex(),
+          fontStyle: italics ? "italic" : undefined,
+        },
+      },
+      {
+        name: "Markup strike",
+        scope: ["markup.strike"],
+        settings: {
+          foreground: scheme.syntax.special.hex(),
+        },
+      },
+      {
+        name: "Markup table",
+        scope: ["markup.table"],
+        settings: {
+          foreground: scheme.syntax.tag.hex(),
+        },
+      },
+
+      // Markdown
+      {
+        name: "Markdown Headings",
+        scope: "entity.name.section.markdown",
+        settings: {
+          fontStyle: "bold",
+          foreground: scheme.syntax.constant.brighten(0.2).hex(),
+        },
+      },
+      {
+        name: "Markdown Headings punctuation",
+        scope: "punctuation.definition.heading.markdown",
+        settings: {
+          fontStyle: "",
+          foreground: scheme.syntax.constant.hex(),
+        },
+      },
+      {
+        name: "Markdown bold",
+        scope: "markup.bold",
+        settings: {
+          fontStyle: "bold",
+          foreground: scheme.syntax.func.hex(),
+        },
+      },
+      {
+        name: "Markdown bold punctuation",
+        scope: "punctuation.definition.bold.markdown",
+        settings: {
+          fontStyle: "bold",
+          foreground: scheme.syntax.func.darken(0.2).hex(),
+        },
+      },
+      {
+        name: "Markdown paragraphs",
+        scope: "meta.paragraph.markdown",
+        settings: {
+          fontStyle: "",
+          foreground: scheme.common.fg.hex(),
+        },
+      },
+      {
+        name: "Markdown italic",
+        scope: "markup.italic",
+        settings: {
+          fontStyle: italics ? "italic" : undefined,
+          foreground: scheme.syntax.special.darken(0.1).hex(),
+        },
+      },
+      {
+        name: "Markdown italic punctuation",
+        scope: "punctuation.definition.italic.markdown",
+        settings: {
+          fontStyle: italics ? "italic" : "",
+          foreground: scheme.syntax.special.darken(0.25).hex(),
+        },
+      },
+      {
+        name: "Markdown bold italic",
+        scope: ["markup.italic markup.bold", "markup.bold markup.italic"],
+        settings: {
+          fontStyle: italics ? "bold italic" : "bold",
+          foreground: scheme.syntax.special.hex(),
+        },
+      },
+      {
+        name: "Markdown bold italic punctuation",
+        scope: [
+          "punctuation.definition.bold.markdown punctuation.definition.italic.markdown",
+          "punctuation.definition.italic.markdown punctuation.definition.bold.markdown",
+        ],
+        settings: {
+          fontStyle: italics ? "bold italic" : "bold",
+          foreground: scheme.syntax.special.darken(0.25).hex(),
+        },
+      },
+      // {
+      //   name: "Markdown code",
+      //   scope: ["markup.raw"],
+      //   settings: {
+      //     background: scheme.common.fg.alpha(0.02).hex(),
+      //   },
+      // },
+      // {
+      //   name: "Markdown code inline",
+      //   scope: ["markup.raw.inline"],
+      //   settings: {
+      //     background: scheme.common.fg.alpha(0.06).hex(),
+      //   },
+      // },
+      {
+        name: "Markdown code block",
+        scope: [
+          "markup.fenced_code.block.markdown punctuation.definition.markdown",
+          "punctuation.definition.markdown",
+          "punctuation.definition.raw.markdown",
+        ],
+        settings: {
+          foreground: scheme.syntax.comment.hex(),
+        },
+      },
+      {
+        name: "Markpdown raw inline",
+        scope: [
+          "markup.inline.raw.markdown",
+          "text.html.markdown markup.fenced_code.block.markdown",
+          "text.html.markdown markup.inline.raw",
+          "markup.inline.raw.string.markdown",
+        ],
+        settings: {
+          foreground: scheme.syntax.operator.hex(),
+        },
+      },
+      {
+        name: "Markdown quotes",
+        scope: "markup.quote",
+        settings: {
+          foreground: scheme.syntax.regexp.hex(),
+          fontStyle: italics ? "italic" : undefined,
+        },
+      },
+      {
+        name: "Markdown line break",
+        scope: ["text.html.markdown meta.dummy.line-break"],
+        settings: {
+          // background: scheme.syntax.comment.hex(),
+          foreground: scheme.syntax.comment.hex(),
+        },
+      },
+      {
+        name: "Markdown link text",
+        scope: ["markup.underline.link", "string.other.link"],
+        settings: {
+          foreground: scheme.common.accent.darken(0.2).hex(),
+        },
+      },
+      {
+        name: "Markdown link URL",
+        scope: [
+          "meta.link",
+          "meta.paragraph.inline.link.underline.detected-link",
+          "markup.underline.link.image.markdown",
+        ],
+        settings: {
+          foreground: scheme.common.accent.hex(),
+        },
+      },
+      {
+        name: "Markdown lists",
+        scope: "markup.list meta.paragraph.markdown",
+        settings: {
+          foreground: scheme.common.fg.hex(),
+        },
+      },
+      {
+        name: "Markdown list bullets",
+        scope: [
+          "markup.list punctuation.definition.list.begin",
+          "beginning.punctuation.definition.list.markdown",
+        ],
+        settings: {
+          foreground: scheme.common.ui.hex(),
         },
       },
 
@@ -2026,18 +2195,19 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         scope: [
           "entity.name.tag",
           "meta.tag.other.html",
+          "meta.tag.html",
+          "keyword.control.html.elements",
+
+          // Other language overrides
           "meta.tag.other.js",
           "meta.tag.other.tsx",
           "meta.tag.sgml",
-          "entity.name.tag",
           "entity.name.tag.open.jsx",
           "entity.name.tag.close.jsx",
           "entity.name.tag.open.tsx",
           "entity.name.tag.close.tsx",
           "meta.tag.js",
           "meta.tag.tsx",
-          "meta.tag.html",
-          "keyword.control.html.elements",
         ],
         settings: {
           foreground: scheme.syntax.tag.hex(),
@@ -2047,9 +2217,6 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "HTML Tag Attribute Name",
         scope: [
           "entity.other.attribute-name",
-
-          // Language-specific overrides
-          "entity.other.attribute-name.js",
           "entity.other.attribute-name.html",
           "entity.other.attribute-name.id.html",
           "meta.tag.any.html entity.other.attribute-name.html",
@@ -2057,7 +2224,10 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "meta.tag.inline.any.html entity.other.attribute-name.html",
           "meta.tag.structure.any.html entity.other.attribute-name.html",
           "meta.tag.other.html entity.other.attribute-name.html",
+
+          // Other language overrides
           "source.js.embedded.html entity.other.attribute-name.html",
+          "entity.other.attribute-name.js",
           "source.ts entity.other.attribute-name",
           "source.tsx entity.other.attribute-name",
           "entity.other.attribute-name.jsx",
@@ -2079,172 +2249,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         },
       },
 
-      // Markdown
-      {
-        name: "Markdown Headings",
-        scope: "entity.name.section.markdown",
-        settings: {
-          fontStyle: "bold",
-          foreground: scheme.syntax.constant.brighten(0.2).hex(),
-        },
-      },
-      {
-        name: "Markdown Headings punctuation",
-        scope: "punctuation.definition.heading.markdown",
-        settings: {
-          fontStyle: "",
-          foreground: scheme.syntax.constant.hex(),
-        },
-      },
-      {
-        name: "Markdown bold",
-        scope: "markup.bold",
-        settings: {
-          fontStyle: "bold",
-          foreground: scheme.syntax.func.hex(),
-        },
-      },
-      {
-        name: "Markdown bold punctuation",
-        scope: "punctuation.definition.bold.markdown",
-        settings: {
-          fontStyle: "bold",
-          foreground: scheme.syntax.func.darken(0.2).hex(),
-        },
-      },
-      {
-        name: "Markdown paragraphs",
-        scope: "meta.paragraph.markdown",
-        settings: {
-          fontStyle: "",
-          foreground: scheme.common.fg.hex(),
-        },
-      },
-      {
-        name: "Markdown italic",
-        scope: "markup.italic",
-        settings: {
-          fontStyle: italics ? "italic" : undefined,
-          foreground: scheme.syntax.special.darken(0.1).hex(),
-        },
-      },
-      {
-        name: "Markdown italic punctuation",
-        scope: "punctuation.definition.italic.markdown",
-        settings: {
-          fontStyle: italics ? "italic" : "",
-          foreground: scheme.syntax.special.darken(0.25).hex(),
-        },
-      },
-      {
-        name: "Markdown bold italic",
-        scope: ["markup.italic markup.bold", "markup.bold markup.italic"],
-        settings: {
-          fontStyle: italics ? "bold italic" : "bold",
-          foreground: scheme.syntax.special.hex(),
-        },
-      },
-      {
-        name: "Markdown bold italic punctuation",
-        scope: [
-          "punctuation.definition.bold.markdown punctuation.definition.italic.markdown",
-          "punctuation.definition.italic.markdown punctuation.definition.bold.markdown",
-        ],
-        settings: {
-          fontStyle: italics ? "bold italic" : "bold",
-          foreground: scheme.syntax.special.darken(0.25).hex(),
-        },
-      },
-      {
-        name: "Markdown code",
-        scope: ["markup.raw"],
-        settings: {
-          background: scheme.common.fg.alpha(0.02).hex(),
-        },
-      },
-      {
-        name: "Markdown code inline",
-        scope: ["markup.raw.inline"],
-        settings: {
-          background: scheme.common.fg.alpha(0.06).hex(),
-        },
-      },
-      {
-        name: "Markdown code block",
-        scope: [
-          "markup.fenced_code.block.markdown punctuation.definition.markdown",
-          "punctuation.definition.markdown",
-          "punctuation.definition.raw.markdown",
-        ],
-        settings: {
-          foreground: scheme.syntax.comment.hex(),
-        },
-      },
-      {
-        name: "Markpdown raw inline",
-        scope: [
-          "markup.inline.raw.markdown",
-          "text.html.markdown markup.fenced_code.block.markdown",
-          "text.html.markdown markup.inline.raw",
-          "markup.inline.raw.string.markdown",
-        ],
-        settings: {
-          foreground: scheme.syntax.operator.hex(),
-        },
-      },
-      {
-        name: "Markdown quotes",
-        scope: "markup.quote",
-        settings: {
-          foreground: scheme.syntax.regexp.hex(),
-          fontStyle: italics ? "italic" : undefined,
-        },
-      },
-      {
-        name: "Markdown line break",
-        scope: ["text.html.markdown meta.dummy.line-break"],
-        settings: {
-          background: scheme.syntax.comment.hex(),
-          foreground: scheme.syntax.comment.hex(),
-        },
-      },
-      {
-        name: "Markdown link text",
-        scope: ["markup.underline.link", "string.other.link"],
-        settings: {
-          foreground: scheme.common.accent.darken(0.2).hex(),
-        },
-      },
-      {
-        name: "Markdown link URL",
-        scope: [
-          "meta.link",
-          "meta.paragraph.inline.link.underline.detected-link",
-          "markup.underline.link.image.markdown",
-        ],
-        settings: {
-          foreground: scheme.common.accent.hex(),
-        },
-      },
-      {
-        name: "Markdown lists",
-        scope: "markup.list meta.paragraph.markdown",
-        settings: {
-          foreground: scheme.common.fg.hex(),
-        },
-      },
-      {
-        name: "Markdown list bullets",
-        scope: [
-          "markup.list punctuation.definition.list.begin",
-          "beginning.punctuation.definition.list.markdown",
-        ],
-        settings: {
-          foreground: scheme.common.ui.hex(),
-        },
-      },
-
-      // JavaScript
+      // JavaScript + TypeScript
       {
         name: "JavaScript support variable object process",
         scope: "support.variable.object.process.js",
@@ -2449,14 +2454,6 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
 export default template;
 
-function wrapExisting(str: string, pair: [string, string]) {
-  return str ? pair[0] + str + pair[1] : str;
-}
-
-function joinExisting(arr: string[], separator?: string) {
-  return arr.filter(Boolean).join(separator);
-}
-
 function darkenIfDark(type: "dark" | "light") {
   return type === "dark" ? "darken" : "brighten";
 }
@@ -2499,9 +2496,4 @@ function _preferredColor(
   // may impact actual visual contrast. Enable as needed and verify manually.
   // warn('No appropriately high contrast color found. You may want to pass more fallback options to be sure content is readable!');
   return firstChoice;
-}
-
-function warn(warning?: any, ...optionalParams: any[]) {
-  console.warn(warning, ...optionalParams);
-  console.trace();
 }

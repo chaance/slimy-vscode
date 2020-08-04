@@ -1,13 +1,13 @@
-import * as path from "path";
-import template, { getThemeMeta, SchemeName } from "./template";
-import { kebabCase } from "lodash";
+import template from "./template";
 import {
   getFilePath,
   writeFile,
   getPackageJSON,
-  formatJSON,
   updatePackageJSON,
+  getThemeMeta,
 } from "./utils";
+import { SchemeName } from "./types";
+import { THEME_HEADER_CONTENT } from "./constants";
 
 const schemes: SchemeName[] = ["dark", "darkContrast", "light"];
 let pkgJSON = getPackageJSON();
@@ -20,7 +20,7 @@ function build() {
     for (let italic of [true, false]) {
       writeFile(
         getFilePath(variant, italic),
-        getThemeFromTemplate(variant, italic)
+        THEME_HEADER_CONTENT + getThemeFromTemplate(variant, italic)
       );
       themes.push(getThemeMeta(variant, italic));
     }
