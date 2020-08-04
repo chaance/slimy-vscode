@@ -7,7 +7,4 @@ A dark, slimy theme for your editor. Inspired by [smlombardi](https://marketplac
 
 Available with and without indent styles applied.
 
-![Mockup of the theme with a TypeScript React editor](assets/screen.png)
-
-## PSA
-This is my first VS Code theme, so if anything looks weird feel free to file and issue or submit a PR. It's also likely to change a bit as I test and experiment in different languages, so if you're not comfortable with potential changes to your color theme I might wait until the 1.0.0 release to install.
+![Mockup of the theme with a TypeScript React editor](https://github.com/chancestrickland/slimy-vscode/raw/main/assets/screen.png)
