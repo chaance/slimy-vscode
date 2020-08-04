@@ -2,8 +2,6 @@
 	"name": "Slimy",
 	"type": "dark",
 	"colors": {
-		"contrastActiveBorder": "#a8df5a",
-		"contrastBorder": "#a8df5a80",
 		"focusBorder": "#737d7e",
 		"foreground": "#919d9f",
 		"widget.shadow": "#f0f0f000",

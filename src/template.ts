@@ -145,8 +145,10 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
     type,
     // https://code.visualstudio.com/api/references/theme-color
     colors: {
-      "contrastActiveBorder": scheme.common.accent.hex(),
-      "contrastBorder": scheme.common.accent.alpha(0.5).hex(),
+      ...(highContrast ? {
+        "contrastActiveBorder": scheme.common.accent.hex(),
+        "contrastBorder": scheme.common.accent.alpha(0.5).hex(),
+      } : {}),
 
       // Base colors
       // @link https://code.visualstudio.com/api/references/theme-color#base-colors
