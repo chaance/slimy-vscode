@@ -2,9 +2,11 @@
   "name": "slimy-theme",
   "displayName": "Slimy",
   "description": "A dark, slimy theme for your editor.",
+  "license": "MIT",
   "version": "0.3.0",
   "publisher": "chancestrickland",
   "scripts": {
+    "build": "ts-node ./src/build.ts",
     "package": "vsce package",
     "pub": "vsce publish"
   },
@@ -13,31 +15,56 @@
     "url": "https://github.com/chancestrickland/slimy-theme"
   },
   "devDependencies": {
-    "vsce": "^1.69.0"
+    "@types/lodash": "^4.14.158",
+    "@types/prettier": "^2.0.2",
+    "lodash": "^4.17.19",
+    "prettier": "^2.0.5",
+    "slimy": "0.2.14",
+    "ts-node": "^8.10.2",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.7",
+    "vsce": "^1.77.0"
   },
-  "engines": {
-    "vscode": "^1.36.0"
+  "prettier": {
+    "arrowParens": "always",
+    "singleQuote": false,
+    "quoteProps": "consistent",
+    "trailingComma": "es5"
   },
-  "categories": [
-    "Themes"
-  ],
+  "engines": { "vscode": "^1.36.0" },
+  "categories": ["Themes"],
   "icon": "icon.png",
   "contributes": {
     "themes": [
       {
         "label": "Slimy",
         "uiTheme": "vs-dark",
-        "path": "./themes/slimy-color-theme.json"
+        "path": "./themes/slimy-dark-color-theme.json"
       },
       {
         "label": "Slimy (no italics)",
         "uiTheme": "vs-dark",
-        "path": "./themes/slimy-noitalics-color-theme.json"
+        "path": "./themes/slimy-dark-noitalics-color-theme.json"
       },
       {
         "label": "Slimy (high-contrast)",
         "uiTheme": "vs-dark",
-        "path": "./themes/slimy-high-contrast-color-theme.json"
+        "path": "./themes/slimy-dark-contrast-color-theme.json"
+      },
+      {
+        "label": "Slimy (high-contrast, no italics)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/slimy-dark-contrast-noitalics-color-theme.json"
+      },
+      {
+        "label": "Slimy (light)",
+        "uiTheme": "vs",
+        "path": "./themes/slimy-light-color-theme.json"
+      },
+      {
+        "label": "Slimy (light, no italics)",
+        "uiTheme": "vs",
+        "path": "./themes/slimy-light-noitalics-color-theme.json"
       }
     ]
   }

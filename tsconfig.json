@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "moduleResolution": "node",
+    "inlineSourceMap": true,
+    "declaration": true,
+    "target": "es5",
+    "resolveJsonModule": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src", "types"],
+  "exclude": ["dist", "node_modules", "themes"]
+}
