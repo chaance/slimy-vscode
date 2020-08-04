@@ -2,6 +2,9 @@
 
 All notable changes to the `slimy` theme are documented in this file.
 
+## v0.4.3
+- Fix visibility problems with line numbers in high contrast variants.
+
 ## v0.4.2
 - Better support for some tokens in golang.
 - Fixes transparency issues with some selection highlights.
