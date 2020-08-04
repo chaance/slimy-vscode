@@ -1,6 +1,10 @@
-.vscode/**
-.vscode-test/**
-.gitignore
-vsc-extension-quickstart.md
-src
-assets
+*
+*/**
+**/.DS_Store
+!README.md
+!themes/*
+!package.json
+!CHANGELOG.md
+!LICENSE
+!assets/*.svg
+!assets/*.png
