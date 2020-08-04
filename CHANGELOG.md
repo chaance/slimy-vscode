@@ -2,6 +2,9 @@
 
 All notable changes to the `slimy` theme are be documented in this file.
 
+## "0.4.1"
+- Removed contrast color settings from standard contrast themes.
+
 ## "0.4.0"
 - Color refresh and overhaul, oh my! I'd consider this a major update, though I'm still not quite ready to push to 1.0 just yet.
   - Reduced number of base colors in leiu of color variant calculations for a little more visual consistency.
