@@ -1,6 +1,4 @@
-import slimy from "slimy";
-
-export type SchemeName = keyof typeof slimy;
+export type { SchemeName } from "slimy";
 
 export type ColorTheme = {
   name: string;

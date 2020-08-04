@@ -467,10 +467,10 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-slimy@0.2.14:
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/slimy/-/slimy-0.2.14.tgz#cd65fc59fe12c47efe8aaba723a1515eb1983bdd"
-  integrity sha512-ZRdpENRmLOkFLEDs1OrQeGP51W0K3jwXrulfhC4RD7AuewsxexDzzmn4M7YDq47+WW0pvJHgGSt53Aczdh6Q3w==
+slimy@0.2.15:
+  version "0.2.15"
+  resolved "https://registry.yarnpkg.com/slimy/-/slimy-0.2.15.tgz#feee721eeafb42a4a1f62fbe6b979dbd4dfb1e44"
+  integrity sha512-XaaiIv5E4rGBpuibNIgaP+apBoGASJ1b81dvu9A3+lvsDCzlZdxLpH9gTdFICPCI62lKWcYEHqZty57xhQhGKw==
   dependencies:
     "@types/chroma-js" "^2.0.0"
     chroma-js "^2.1.0"

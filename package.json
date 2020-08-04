@@ -19,7 +19,7 @@
     "@types/prettier": "^2.0.2",
     "lodash": "^4.17.19",
     "prettier": "^2.0.5",
-    "slimy": "0.2.14",
+    "slimy": "0.2.15",
     "ts-node": "^8.10.2",
     "tslib": "^2.0.0",
     "typescript": "^3.9.7",

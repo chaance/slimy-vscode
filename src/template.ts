@@ -18,26 +18,26 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
   const fgColorIfContrastChecks = (baseColor: Color) =>
     prefers(
       baseColor,
-      scheme.common.fg,
-      scheme.common.bg,
+      scheme.base.fg,
+      scheme.base.bg,
       scheme.chalk.black,
       scheme.chalk.white
     );
   const bgColorIfContrastChecks = (baseColor: Color) =>
     prefers(
       baseColor,
-      scheme.common.bg,
-      scheme.common.fg,
+      scheme.base.bg,
+      scheme.base.fg,
       scheme.chalk.white,
       scheme.chalk.black
     );
 
-  const badgeBackground = scheme.common.accent[darkenIfDark(type)](1);
+  const badgeBackground = scheme.base.accent[darkenIfDark(type)](1);
   const badgeForeground = fgColorIfContrastChecks(badgeBackground);
 
   const buttonBackground = scheme.ui.button.bg;
   const buttonForeground = fgColorIfContrastChecks(buttonBackground);
-  const secondaryButtonBackground = scheme.common.accent;
+  const secondaryButtonBackground = scheme.base.accent;
   const secondaryButtonForeground = fgColorIfContrastChecks(
     secondaryButtonBackground
   );
@@ -46,20 +46,20 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
   const listActiveSelectionForeground = prefers(
     scheme.ui.list.activeBg,
     scheme.ui.list.activeFg,
-    scheme.common.fg,
-    scheme.common.bg
+    scheme.base.fg,
+    scheme.base.bg
   );
 
   const listHoverBackground = scheme.ui.list.hoverBg;
   const listHoverForeground = prefers(
     scheme.ui.list.hoverBg,
     scheme.ui.list.hoverFg,
-    scheme.common.fg,
-    scheme.common.bg
+    scheme.base.fg,
+    scheme.base.bg
   );
 
   const selectionBackground = scheme.ui.selection.bg;
-  const selectionForeground = scheme.common.fg;
+  const selectionForeground = scheme.base.fg;
 
   const syntaxTypeParam = scheme.syntax.type.alpha(0.75);
   const syntaxEnum = scheme.syntax.type.brighten(0.15);
@@ -83,20 +83,20 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       ...(highContrast
         ? {
             contrastActiveBorder:
-              type === "light" ? scheme.common.accent.hex() : undefined,
-            contrastBorder: scheme.common.accent.alpha(0.5).hex(),
+              type === "light" ? scheme.base.accent.hex() : undefined,
+            contrastBorder: scheme.base.accent.alpha(0.5).hex(),
           }
         : {}),
 
       // Base colors
       // @link https://code.visualstudio.com/api/references/theme-color#base-colors
-      "focusBorder": scheme.common.ui.fade(0.4).hex(),
-      "foreground": scheme.common.ui.hex(),
+      "focusBorder": scheme.base.ui.fade(0.4).hex(),
+      "foreground": scheme.base.ui.hex(),
       "widget.shadow": scheme.ui.panel.shadow?.hex() || transparent,
       "selection.background": selectionBackground.alpha(0.4).hex(),
-      "descriptionForeground": scheme.common.ui.hex(),
+      "descriptionForeground": scheme.base.ui.hex(),
       "errorForeground": scheme.syntax.error.hex(),
-      "icon.foreground": scheme.common.ui.hex(),
+      "icon.foreground": scheme.base.ui.hex(),
 
       // Window border
       // @link https://code.visualstudio.com/api/references/theme-color#window-border
@@ -108,10 +108,10 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "textBlockQuote.background": scheme.ui.panel.bg.hex(),
       "textBlockQuote.border": scheme.ui.panel.border?.hex() || transparent,
       "textCodeBlock.background": scheme.ui.popover.bg.hex(),
-      "textLink.activeForeground": scheme.common.accent.brighten(0.2).hex(),
-      "textLink.foreground": scheme.common.accent.hex(),
-      "textPreformat.foreground": scheme.common.fg.hex(),
-      "textSeparator.foreground": scheme.common.ui.hex(),
+      "textLink.activeForeground": scheme.base.accent.brighten(0.2).hex(),
+      "textLink.foreground": scheme.base.accent.hex(),
+      "textPreformat.foreground": scheme.base.fg.hex(),
+      "textSeparator.foreground": scheme.base.ui.hex(),
 
       // Button control
       // @link https://code.visualstudio.com/api/references/theme-color#button-control
@@ -124,7 +124,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         darkenIfDark(type)
       ](0.2).hex(),
       "checkbox.background": scheme.ui.popover.bg.hex(),
-      "checkbox.foreground": scheme.common.ui.hex(),
+      "checkbox.foreground": scheme.base.ui.hex(),
       "checkbox.border": scheme.ui.popover.border?.hex() || transparent,
 
       // Dropdown control
@@ -132,37 +132,37 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "dropdown.background": scheme.ui.popover.bg.hex(),
       "dropdown.listBackground": scheme.ui.popover.bg.hex(),
       "dropdown.border": scheme.ui.popover.border?.hex() || transparent,
-      "dropdown.foreground": scheme.common.ui.hex(),
+      "dropdown.foreground": scheme.base.ui.hex(),
 
       // Input control
       // @link https://code.visualstudio.com/api/references/theme-color#input-control
       "input.background": scheme.ui.popover.bg.hex(),
       "input.border": scheme.ui.popover.border?.hex() || transparent,
-      "input.foreground": scheme.common.fg.hex(),
-      "input.placeholderForeground": scheme.common.ui.fade(0.3).hex(),
+      "input.foreground": scheme.base.fg.hex(),
+      "input.placeholderForeground": scheme.base.ui.fade(0.3).hex(),
       "inputOption.activeBackground": scheme.ui.popover.bg.hex(),
-      "inputOption.activeBorder": scheme.common.accent.hex(),
-      "inputOption.activeForeground": scheme.common.fg.hex(),
+      "inputOption.activeBorder": scheme.base.accent.hex(),
+      "inputOption.activeForeground": scheme.base.fg.hex(),
       "inputValidation.errorBackground": scheme.ui.popover.bg.hex(),
       "inputValidation.errorBorder": scheme.ui.state.error.hex(),
-      "inputValidation.errorForeground": scheme.common.fg.hex(),
+      "inputValidation.errorForeground": scheme.base.fg.hex(),
       "inputValidation.infoBackground": scheme.ui.popover.bg.hex(),
       "inputValidation.infoBorder": scheme.ui.state.info.hex(),
-      "inputValidation.infoForeground": scheme.common.fg.hex(),
+      "inputValidation.infoForeground": scheme.base.fg.hex(),
       "inputValidation.warningBackground": scheme.ui.popover.bg.hex(),
       "inputValidation.warningBorder": scheme.ui.state.warning.hex(),
-      "inputValidation.warningForeground": scheme.common.fg.hex(),
+      "inputValidation.warningForeground": scheme.base.fg.hex(),
 
       // Scrollbar control
       // @link https://code.visualstudio.com/api/references/theme-color#scrollbar-control
       "scrollbar.shadow": transparent,
-      "scrollbarSlider.activeBackground": scheme.common.ui
+      "scrollbarSlider.activeBackground": scheme.base.ui
         .alpha(highContrast ? 0.9 : 0.5)
         .hex(),
-      "scrollbarSlider.background": scheme.common.ui
+      "scrollbarSlider.background": scheme.base.ui
         .alpha(highContrast ? 0.5 : 0.2)
         .hex(),
-      "scrollbarSlider.hoverBackground": scheme.common.ui
+      "scrollbarSlider.hoverBackground": scheme.base.ui
         .alpha(highContrast ? 0.8 : 0.4)
         .hex(),
 
@@ -173,7 +173,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
       // Progress bar
       // @link https://code.visualstudio.com/api/references/theme-color#progress-bar
-      "progressBar.background": scheme.common.accent.hex(),
+      "progressBar.background": scheme.base.accent.hex(),
 
       // Lists and trees
       // @link https://code.visualstudio.com/api/references/theme-color#lists-and-trees
@@ -182,7 +182,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "list.dropBackground": listActiveSelectionBackground.hex(),
       "list.focusBackground": listActiveSelectionBackground.hex(),
       "list.focusForeground": listActiveSelectionForeground.hex(),
-      "list.highlightForeground": scheme.common.accent[brightenIfDark(type)](
+      "list.highlightForeground": scheme.base.accent[brightenIfDark(type)](
         0.2
       ).hex(),
       "list.hoverBackground": listHoverBackground.hex(),
@@ -193,7 +193,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "list.inactiveSelectionForeground": listActiveSelectionForeground
         .alpha(0.5)
         .hex(),
-      "list.invalidItemForeground": scheme.common.ui.alpha(0.7).hex(),
+      "list.invalidItemForeground": scheme.base.ui.alpha(0.7).hex(),
       "list.errorForeground": scheme.ui.state.error[brightenIfDark(type)](
         0.2
       ).hex(),
@@ -204,19 +204,19 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "listFilterWidget.outline":
         scheme.ui.popover.border?.hex() || transparent,
       "listFilterWidget.noMatchesOutline": scheme.ui.state.error.hex(),
-      "list.filterMatchBackground": scheme.common.accent.alpha(0.05).hex(),
-      "list.filterMatchBorder": scheme.common.accent.hex(),
+      "list.filterMatchBackground": scheme.base.accent.alpha(0.05).hex(),
+      "list.filterMatchBorder": scheme.base.accent.hex(),
       "tree.indentGuidesStroke": transparent,
-      "list.deemphasizedForeground": scheme.common.fg.fade(0.25).hex(),
+      "list.deemphasizedForeground": scheme.base.fg.fade(0.25).hex(),
 
       // Activity Bar
       // @link https://code.visualstudio.com/api/references/theme-color#activity-bar
-      "activityBar.background": scheme.common.bg.hex(),
-      "activityBar.dropBorder": scheme.common.accent.hex(),
-      "activityBar.foreground": scheme.common.ui
+      "activityBar.background": scheme.base.bg.hex(),
+      "activityBar.dropBorder": scheme.base.accent.hex(),
+      "activityBar.foreground": scheme.base.ui
         .alpha(highContrast ? 1 : 0.6)
         .hex(),
-      "activityBar.inactiveForeground": scheme.common.ui
+      "activityBar.inactiveForeground": scheme.base.ui
         .alpha(highContrast ? 0.6 : 0.4)
         .hex(),
       "activityBar.border": transparent,
@@ -225,18 +225,18 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "activityBar.activeBorder": transparent,
       "activityBar.activeBackground": transparent,
       "activityBar.activeFocusBorder": highContrast
-        ? scheme.common.accent.hex()
+        ? scheme.base.accent.hex()
         : transparent,
 
       // Side Bar
       // @link https://code.visualstudio.com/api/references/theme-color#side-bar
-      "sideBar.background": scheme.common.bg.hex(),
-      "sideBar.foreground": scheme.common.fg.hex(),
+      "sideBar.background": scheme.base.bg.hex(),
+      "sideBar.foreground": scheme.base.fg.hex(),
       "sideBar.border": transparent,
       "sideBar.dropBackground": transparent,
-      "sideBarTitle.foreground": scheme.common.ui.hex(),
-      "sideBarSectionHeader.background": scheme.common.bg.hex(),
-      "sideBarSectionHeader.foreground": scheme.common.ui.hex(),
+      "sideBarTitle.foreground": scheme.base.ui.hex(),
+      "sideBarSectionHeader.background": scheme.base.bg.hex(),
+      "sideBarSectionHeader.foreground": scheme.base.ui.hex(),
       "sideBarSectionHeader.border": transparent,
 
       // Minimap
@@ -257,37 +257,37 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       // @link https://code.visualstudio.com/api/references/theme-color#editor-groups-tabs
       // Editor Groups are the containers of editors. There can be many editor groups.
       "editorGroup.border": transparent,
-      "editorGroup.dropBackground": scheme.common.accent.alpha(0.2).hex(),
-      "editorGroupHeader.noTabsBackground": scheme.common.bg.hex(),
-      "editorGroupHeader.tabsBackground": scheme.common.bg.hex(),
+      "editorGroup.dropBackground": scheme.base.accent.alpha(0.2).hex(),
+      "editorGroupHeader.noTabsBackground": scheme.base.bg.hex(),
+      "editorGroupHeader.tabsBackground": scheme.base.bg.hex(),
       "editorGroupHeader.tabsBorder": transparent,
       "editorGroupHeader.border": transparent,
-      "editorGroup.emptyBackground": scheme.common.bg.hex(),
+      "editorGroup.emptyBackground": scheme.base.bg.hex(),
       "editorGroup.focusedEmptyBorder": transparent,
       // A Tab is the container of an editor. Multiple Tabs can be opened in one editor group.
-      "tab.activeBackground": scheme.common.bg.brighten(0.4).hex(),
-      "tab.unfocusedActiveBackground": scheme.common.bg.brighten(0.4).hex(),
+      "tab.activeBackground": scheme.base.bg.brighten(0.4).hex(),
+      "tab.unfocusedActiveBackground": scheme.base.bg.brighten(0.4).hex(),
       "tab.activeForeground": fgColorIfContrastChecks(
-        scheme.common.bg.brighten(0.4)
+        scheme.base.bg.brighten(0.4)
       ).hex(),
       "tab.border": transparent,
       "tab.activeBorder": transparent,
       "tab.unfocusedActiveBorder": transparent,
-      "tab.activeBorderTop": scheme.common.accent.hex(),
+      "tab.activeBorderTop": scheme.base.accent.hex(),
       "tab.unfocusedActiveBorderTop": transparent,
-      "tab.inactiveBackground": scheme.common.bg.hex(),
-      "tab.inactiveForeground": scheme.common.ui.hex(),
+      "tab.inactiveBackground": scheme.base.bg.hex(),
+      "tab.inactiveForeground": scheme.base.ui.hex(),
       "tab.unfocusedActiveForeground": fgColorIfContrastChecks(
-        scheme.common.bg.brighten(0.4)
+        scheme.base.bg.brighten(0.4)
       ).hex(),
-      "tab.unfocusedInactiveForeground": scheme.common.ui.hex(),
-      "tab.hoverBackground": scheme.common.bg.brighten(0.2).hex(),
-      "tab.unfocusedHoverBackground": scheme.common.bg.brighten(0.2).hex(),
+      "tab.unfocusedInactiveForeground": scheme.base.ui.hex(),
+      "tab.hoverBackground": scheme.base.bg.brighten(0.2).hex(),
+      "tab.unfocusedHoverBackground": scheme.base.bg.brighten(0.2).hex(),
       "tab.hoverForeground": fgColorIfContrastChecks(
-        scheme.common.bg.brighten(0.2)
+        scheme.base.bg.brighten(0.2)
       ).hex(),
       "tab.unfocusedHoverForeground": fgColorIfContrastChecks(
-        scheme.common.bg.brighten(0.2)
+        scheme.base.bg.brighten(0.2)
       ).hex(),
       "tab.hoverBorder": transparent,
       "tab.unfocusedHoverBorder": transparent,
@@ -295,16 +295,16 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       // 'tab.inactiveModifiedBorder': '',
       // 'tab.unfocusedActiveModifiedBorder': '',
       // 'tab.unfocusedInactiveModifiedBorder': '',
-      "editorPane.background": scheme.common.bg.hex(),
+      "editorPane.background": scheme.base.bg.hex(),
 
       // Editor colors
       // @link https://code.visualstudio.com/api/references/theme-color#editor-colors
-      "editor.background": scheme.common.bg.hex(),
-      "editor.foreground": scheme.common.fg.hex(),
+      "editor.background": scheme.base.bg.hex(),
+      "editor.foreground": scheme.base.fg.hex(),
       "editorLineNumber.foreground": scheme.ui.gutter.normal.hex(),
       "editorLineNumber.activeForeground": scheme.ui.gutter.active.hex(),
       "editorCursor.background": transparent,
-      "editorCursor.foreground": scheme.common.accent.hex(),
+      "editorCursor.foreground": scheme.base.accent.hex(),
 
       // Selection colors are visible when selecting one or more characters. In
       // addition to the selection also all regions with the same content are
@@ -334,9 +334,9 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
       // Find colors depend on the current find string in the Find/Replace
       // dialog.
-      "editor.findMatchBackground": scheme.common.accent.alpha(0.05).hex(),
+      "editor.findMatchBackground": scheme.base.accent.alpha(0.05).hex(),
       "editor.findMatchBorder": transparent,
-      "editor.findMatchHighlightBackground": scheme.common.accent
+      "editor.findMatchHighlightBackground": scheme.base.accent
         .alpha(0.05)
         .hex(),
       "editor.findMatchHighlightBorder": transparent,
@@ -351,21 +351,21 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
       // The hover highlight is shown behind the symbol for which a hover is
       // shown.
-      "editor.hoverHighlightBackground": scheme.common.bg
+      "editor.hoverHighlightBackground": scheme.base.bg
         .darken(0.8)
         .alpha(0.2)
         .hex(),
 
       // The current line is typically shown as either background highlight or a
       // border (not both).
-      "editor.lineHighlightBackground": scheme.common.bg.darken(0.2).hex(),
+      "editor.lineHighlightBackground": scheme.base.bg.darken(0.2).hex(),
       "editor.lineHighlightBorder": transparent,
 
       // The link color is visible when clicking on a link.
-      "editorLink.activeForeground": scheme.common.accent.hex(),
+      "editorLink.activeForeground": scheme.base.accent.hex(),
 
       // The range highlight is visible when selecting a search result.
-      "editor.rangeHighlightBackground": scheme.common.bg
+      "editor.rangeHighlightBackground": scheme.base.bg
         .darken(0.8)
         .alpha(0.2)
         .hex(),
@@ -373,7 +373,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
       // The symbol highlight is visible when navigating to a symbol via a
       // command such as `Go to Definition`.
-      "editor.symbolHighlightBackground": scheme.common.bg
+      "editor.symbolHighlightBackground": scheme.base.bg
         .darken(0.8)
         .alpha(0.2)
         .hex(),
@@ -393,7 +393,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "editorCodeLens.foreground": scheme.syntax.comment.hex(),
 
       // Lightbulb
-      "editorLightBulb.foreground": scheme.common.accent.hex(),
+      "editorLightBulb.foreground": scheme.base.accent.hex(),
       // 'editorLightBulbAutoFix.foreground': '',
 
       // Bracket matches
@@ -407,15 +407,15 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       // of the editor and gives an overview of the decorations in the editor.
       // 'editorOverviewRuler.background': '',
       "editorOverviewRuler.border": transparent,
-      "editorOverviewRuler.findMatchForeground": scheme.common.accent
+      "editorOverviewRuler.findMatchForeground": scheme.base.accent
         .alpha(0.8)
         .hex(),
       // 'editorOverviewRuler.rangeHighlightForeground': '',
       // 'editorOverviewRuler.selectionHighlightForeground': '',
-      "editorOverviewRuler.wordHighlightForeground": scheme.common.accent
+      "editorOverviewRuler.wordHighlightForeground": scheme.base.accent
         .alpha(0.4)
         .hex(),
-      "editorOverviewRuler.wordHighlightStrongForeground": scheme.common.accent
+      "editorOverviewRuler.wordHighlightStrongForeground": scheme.base.accent
         .alpha(0.4)
         .hex(),
       "editorOverviewRuler.modifiedForeground": scheme.syntax.entity
@@ -427,7 +427,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         .hex(),
       "editorOverviewRuler.errorForeground": scheme.syntax.error.hex(),
       "editorOverviewRuler.warningForeground": scheme.ui.state.warning.hex(),
-      "editorOverviewRuler.infoForeground": scheme.common.accent.hex(),
+      "editorOverviewRuler.infoForeground": scheme.base.accent.hex(),
       // 'editorOverviewRuler.bracketMatchForeground': '',
 
       // Errors and warnings
@@ -435,7 +435,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "editorError.border": transparent,
       "editorWarning.foreground": scheme.syntax.entity.hex(),
       "editorWarning.border": transparent,
-      "editorInfo.foreground": scheme.common.accent.hex(),
+      "editorInfo.foreground": scheme.base.accent.hex(),
       "editorInfo.border": transparent,
       "editorHint.border": transparent,
       // 'problemsErrorIcon.foreground': '',
@@ -447,7 +447,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       // 'editorUnnecessaryCode.opacity': '',
 
       // The gutter contains the glyph margins and the line numbers
-      "editorGutter.background": scheme.common.bg.hex(),
+      "editorGutter.background": scheme.base.bg.hex(),
       "editorGutter.modifiedBackground": scheme.vcs.modified.alpha(0.6).hex(),
       "editorGutter.addedBackground": scheme.vcs.added.alpha(0.6).hex(),
       "editorGutter.deletedBackground": scheme.vcs.removed.alpha(0.6).hex(),
@@ -465,7 +465,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
       // Editor widget colors
       // @link https://code.visualstudio.com/api/references/theme-color#editor-widget-colors
-      "editorWidget.foreground": scheme.common.fg.hex(),
+      "editorWidget.foreground": scheme.base.fg.hex(),
       "editorWidget.background": scheme.ui.popover.bg.hex(),
       "editorWidget.border": scheme.ui.popover.border?.hex() || transparent,
       "editorWidget.resizeBorder":
@@ -473,12 +473,12 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "editorSuggestWidget.background": scheme.ui.popover.bg.hex(),
       "editorSuggestWidget.border":
         scheme.ui.popover.border?.hex() || transparent,
-      "editorSuggestWidget.foreground": scheme.common.ui.brighten(0.2).hex(),
-      "editorSuggestWidget.highlightForeground": scheme.common.ui
+      "editorSuggestWidget.foreground": scheme.base.ui.brighten(0.2).hex(),
+      "editorSuggestWidget.highlightForeground": scheme.base.ui
         .brighten(0.2)
         .hex(),
       "editorSuggestWidget.selectedBackground": listActiveSelectionBackground.hex(),
-      "editorHoverWidget.foreground": scheme.common.ui.hex(),
+      "editorHoverWidget.foreground": scheme.base.ui.hex(),
       "editorHoverWidget.background": scheme.ui.popover.bg.hex(),
       "editorHoverWidget.border":
         scheme.ui.popover.border?.hex() || transparent,
@@ -509,8 +509,8 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "peekViewResult.selectionBackground": selectionBackground.hex(),
       "peekViewResult.selectionForeground": selectionForeground.hex(),
       "peekViewTitle.background": scheme.ui.popover.bg.hex(),
-      "peekViewTitleDescription.foreground": scheme.common.ui.hex(),
-      "peekViewTitleLabel.foreground": scheme.common.ui.hex(),
+      "peekViewTitleDescription.foreground": scheme.base.ui.hex(),
+      "peekViewTitleLabel.foreground": scheme.base.ui.hex(),
 
       // Merge conflicts
       // @link https://code.visualstudio.com/api/references/theme-color#merge-conflicts-colors
@@ -534,45 +534,45 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
       // Panel
       // @link https://code.visualstudio.com/api/references/theme-color#panel-colors
-      "panel.background": scheme.common.bg.hex(),
+      "panel.background": scheme.base.bg.hex(),
       "panel.border": transparent,
       "panelTitle.activeBorder": transparent,
-      "panelTitle.activeForeground": scheme.common.fg.hex(),
-      "panelTitle.inactiveForeground": scheme.common.ui.brighten(0.2).hex(),
+      "panelTitle.activeForeground": scheme.base.fg.hex(),
+      "panelTitle.inactiveForeground": scheme.base.ui.brighten(0.2).hex(),
 
       // Status Bar colors
       // @link https://code.visualstudio.com/api/references/theme-color#status-bar-colors
-      "statusBar.background": scheme.common.bg.hex(),
-      "statusBar.foreground": scheme.common.ui.brighten(0.2).hex(),
+      "statusBar.background": scheme.base.bg.hex(),
+      "statusBar.foreground": scheme.base.ui.brighten(0.2).hex(),
       "statusBar.border": transparent,
       "statusBar.debuggingBackground": scheme.syntax.constant.hex(),
-      "statusBar.debuggingForeground": scheme.common.fg.hex(),
+      "statusBar.debuggingForeground": scheme.base.fg.hex(),
       "statusBar.debuggingBorder": transparent,
-      "statusBar.noFolderForeground": scheme.common.ui.brighten(0.2).hex(),
-      "statusBar.noFolderBackground": scheme.common.bg.hex(),
+      "statusBar.noFolderForeground": scheme.base.ui.brighten(0.2).hex(),
+      "statusBar.noFolderBackground": scheme.base.bg.hex(),
       "statusBar.noFolderBorder": transparent,
       "statusBarItem.activeBackground": transparent,
       "statusBarItem.hoverBackground": transparent,
-      "statusBarItem.prominentForeground": scheme.common.fg.hex(),
+      "statusBarItem.prominentForeground": scheme.base.fg.hex(),
       "statusBarItem.prominentBackground": transparent,
       "statusBarItem.prominentHoverBackground": transparent,
 
       // Title bar colors
       // @link https://code.visualstudio.com/api/references/theme-color#title-bar-colors
-      "titleBar.activeBackground": scheme.common.bg.hex(),
-      "titleBar.activeForeground": scheme.common.fg.hex(),
-      "titleBar.inactiveBackground": scheme.common.bg.hex(),
-      "titleBar.inactiveForeground": scheme.common.ui.brighten(0.2).hex(),
+      "titleBar.activeBackground": scheme.base.bg.hex(),
+      "titleBar.activeForeground": scheme.base.fg.hex(),
+      "titleBar.inactiveBackground": scheme.base.bg.hex(),
+      "titleBar.inactiveForeground": scheme.base.ui.brighten(0.2).hex(),
       "titleBar.border": transparent,
 
       // Menu bar colors
       // @link https://code.visualstudio.com/api/references/theme-color#menu-bar-colors
-      "menubar.selectionForeground": scheme.common.fg.hex(),
+      "menubar.selectionForeground": scheme.base.fg.hex(),
       "menubar.selectionBorder": scheme.ui.popover.border?.hex() || transparent,
-      "menu.foreground": scheme.common.ui.brighten(0.2).hex(),
+      "menu.foreground": scheme.base.ui.brighten(0.2).hex(),
       "menu.background": scheme.ui.popover.bg.hex(),
       "menu.border": scheme.ui.popover.border?.hex() || transparent,
-      "menu.selectionForeground": scheme.common.fg.hex(),
+      "menu.selectionForeground": scheme.base.fg.hex(),
       "menu.selectionBorder": scheme.ui.popover.border?.hex() || transparent,
       "menu.separatorBackground": transparent,
 
@@ -580,21 +580,19 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       // @link https://code.visualstudio.com/api/references/theme-color#notification-colors
       "notificationCenter.border":
         scheme.ui.popover.border?.hex() || transparent,
-      "notificationCenterHeader.foreground": scheme.common.ui
-        .brighten(0.2)
-        .hex(),
+      "notificationCenterHeader.foreground": scheme.base.ui.brighten(0.2).hex(),
       "notificationCenterHeader.background": scheme.ui.popover.bg.hex(),
       "notificationToast.border": transparent,
-      "notifications.foreground": scheme.common.fg.hex(),
+      "notifications.foreground": scheme.base.fg.hex(),
       "notifications.background": scheme.ui.popover.bg.hex(),
       "notifications.border": scheme.ui.popover.border?.hex() || transparent,
-      "notificationLink.foreground": scheme.common.accent.hex(),
+      "notificationLink.foreground": scheme.base.accent.hex(),
 
       // Extensions
       // @link https://code.visualstudio.com/api/references/theme-color#extensions-colors
-      "extensionButton.prominentForeground": scheme.common.bg.fade(0.5).hex(),
-      "extensionButton.prominentBackground": scheme.common.accent.hex(),
-      "extensionButton.prominentHoverBackground": scheme.common.accent
+      "extensionButton.prominentForeground": scheme.base.bg.fade(0.5).hex(),
+      "extensionButton.prominentBackground": scheme.base.accent.hex(),
+      "extensionButton.prominentHoverBackground": scheme.base.accent
         .darken(0.1)
         .hex(),
       "extensionBadge.remoteBackground": badgeBackground.hex(),
@@ -603,16 +601,16 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       // Quick picker colors
       // @link https://code.visualstudio.com/api/references/theme-color#quick-picker-colors
       "pickerGroup.border": scheme.ui.popover.border?.hex() || transparent,
-      "pickerGroup.foreground": scheme.common.ui.fade(0.5).hex(),
+      "pickerGroup.foreground": scheme.base.ui.fade(0.5).hex(),
       "quickInput.background": scheme.ui.popover.bg.hex(),
-      "quickInput.foreground": scheme.common.ui.brighten(0.2).hex(),
+      "quickInput.foreground": scheme.base.ui.brighten(0.2).hex(),
       // 'quickInputTitle.background': '',
 
       // Integrated terminal colors
       // @link https://code.visualstudio.com/api/references/theme-color#integrated-terminal-colors
-      "terminal.background": scheme.common.bg.hex(),
+      "terminal.background": scheme.base.bg.hex(),
       "terminal.border": transparent,
-      "terminal.foreground": scheme.common.ui.brighten(0.2).hex(),
+      "terminal.foreground": scheme.base.ui.brighten(0.2).hex(),
       "terminal.ansiBlack": scheme.chalk.black.hex(),
       "terminal.ansiRed": scheme.chalk.red.hex(),
       "terminal.ansiGreen": scheme.chalk.green.hex(),
@@ -635,7 +633,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       ).hex(),
       "terminal.selectionBackground": selectionBackground.hex(),
       "terminalCursor.background": transparent,
-      "terminalCursor.foreground": scheme.common.accent.hex(),
+      "terminalCursor.foreground": scheme.base.accent.hex(),
 
       // Debug colors
       // @link https://code.visualstudio.com/api/references/theme-color#debug-colors
@@ -648,7 +646,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       // 'debugView.stateLabelForeground': '',
       // 'debugView.stateLabelBackground': '',
       // 'debugView.valueChangedHighlight': '',
-      "debugTokenExpression.name": scheme.common.ui.hex(),
+      "debugTokenExpression.name": scheme.base.ui.hex(),
       "debugTokenExpression.value": scheme.syntax.entity.hex(),
       "debugTokenExpression.string": scheme.syntax.string.hex(),
       "debugTokenExpression.boolean": scheme.syntax.boolean.hex(),
@@ -668,25 +666,23 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
       // Git
       // @link https://code.visualstudio.com/api/references/theme-color#git-colors
-      "gitDecoration.addedResourceForeground": scheme.common.ui
+      "gitDecoration.addedResourceForeground": scheme.base.ui
         .brighten(0.2)
         .hex(),
-      "gitDecoration.modifiedResourceForeground": scheme.common.ui
+      "gitDecoration.modifiedResourceForeground": scheme.base.ui
         .brighten(0.2)
         .hex(),
-      "gitDecoration.deletedResourceForeground": scheme.common.ui
+      "gitDecoration.deletedResourceForeground": scheme.base.ui
         .brighten(0.2)
         .hex(),
-      "gitDecoration.untrackedResourceForeground": scheme.common.ui
+      "gitDecoration.untrackedResourceForeground": scheme.base.ui
         .brighten(0.2)
         .hex(),
-      "gitDecoration.ignoredResourceForeground": scheme.common.ui
-        .fade(0.2)
-        .hex(),
-      "gitDecoration.conflictingResourceForeground": scheme.common.ui
+      "gitDecoration.ignoredResourceForeground": scheme.base.ui.fade(0.2).hex(),
+      "gitDecoration.conflictingResourceForeground": scheme.base.ui
         .brighten(0.2)
         .hex(),
-      "gitDecoration.submoduleResourceForeground": scheme.common.ui
+      "gitDecoration.submoduleResourceForeground": scheme.base.ui
         .brighten(0.2)
         .hex(),
 
@@ -699,7 +695,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       // 'settings.dropdownBorder': '',
       // 'settings.dropdownListBorder': '',
       "settings.checkboxBackground": scheme.ui.popover.bg.hex(),
-      "settings.checkboxForeground": scheme.common.ui.brighten(0.2).hex(),
+      "settings.checkboxForeground": scheme.base.ui.brighten(0.2).hex(),
       "settings.checkboxBorder": scheme.ui.popover.border?.hex() || transparent,
       // 'settings.textInputBackground': '',
       // 'settings.textInputForeground': '',
@@ -710,10 +706,10 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
 
       // Breadcrumbs
       // @link https://code.visualstudio.com/api/references/theme-color#breadcrumbs-colors
-      "breadcrumb.foreground": scheme.common.ui.brighten(0.2).hex(),
-      "breadcrumb.background": scheme.common.bg.hex(),
-      "breadcrumb.focusForeground": scheme.common.fg.hex(),
-      "breadcrumb.activeSelectionForeground": scheme.common.ui
+      "breadcrumb.foreground": scheme.base.ui.brighten(0.2).hex(),
+      "breadcrumb.background": scheme.base.bg.hex(),
+      "breadcrumb.focusForeground": scheme.base.fg.hex(),
+      "breadcrumb.activeSelectionForeground": scheme.base.ui
         .brighten(0.2)
         .hex(),
       // 'breadcrumbPicker.background': '',
@@ -748,7 +744,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "symbolIcon.namespaceForeground": syntaxNamespace.hex(),
       "symbolIcon.nullForeground": syntaxNull.hex(),
       "symbolIcon.numberForeground": scheme.syntax.number.hex(),
-      "symbolIcon.objectForeground": scheme.common.ui.hex(),
+      "symbolIcon.objectForeground": scheme.base.ui.hex(),
       "symbolIcon.operatorForeground": scheme.syntax.operator.hex(),
       "symbolIcon.packageForeground": syntaxKeywordControl.hex(),
       "symbolIcon.propertyForeground": syntaxObjectKey.hex(),
@@ -756,14 +752,14 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       "symbolIcon.snippetForeground": scheme.syntax.entity.hex(),
       "symbolIcon.stringForeground": scheme.syntax.string.hex(),
       "symbolIcon.structForeground": scheme.syntax.special.hex(),
-      "symbolIcon.textForeground": scheme.common.fg.hex(),
+      "symbolIcon.textForeground": scheme.base.fg.hex(),
       "symbolIcon.typeParameterForeground": syntaxTypeParam.hex(),
       "symbolIcon.unitForeground": scheme.syntax.keyword.hex(),
       "symbolIcon.variableForeground": scheme.syntax.variable.hex(),
 
       // Debug Icons
       // @link https://code.visualstudio.com/api/references/theme-color#debug-icons-colors
-      "debugIcon.breakpointForeground": scheme.common.accent.hex(),
+      "debugIcon.breakpointForeground": scheme.base.accent.hex(),
       "debugIcon.breakpointDisabledForeground": scheme.ui.state.error.hex(),
       // 'debugIcon.breakpointUnverifiedForeground': '',
       // 'debugIcon.breakpointCurrentStackframeForeground': '',
@@ -837,15 +833,15 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
     tokenColors: [
       {
         settings: {
-          // background: scheme.common.bg.hex(),
-          foreground: scheme.common.fg.hex(),
+          // background: scheme.base.bg.hex(),
+          foreground: scheme.base.fg.hex(),
         },
       },
       {
         name: "Groovy",
         scope: ["meta.embedded", "source.groovy.embedded"],
         settings: {
-          foreground: scheme.common.fg.brighten(0.2).hex(),
+          foreground: scheme.base.fg.brighten(0.2).hex(),
         },
       },
       {
@@ -885,7 +881,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "meta.tsx.children.tsx",
         ],
         settings: {
-          foreground: scheme.common.fg.hex(),
+          foreground: scheme.base.fg.hex(),
         },
       },
       {
@@ -1040,7 +1036,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "Math constant",
         scope: "support.constant.math",
         settings: {
-          foreground: scheme.common.fg.hex(),
+          foreground: scheme.base.fg.hex(),
         },
       },
       {
@@ -1075,7 +1071,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "Delimiters",
         scope: ["none"],
         settings: {
-          foreground: scheme.common.fg.hex(),
+          foreground: scheme.base.fg.hex(),
         },
       },
       {
@@ -1138,21 +1134,21 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "Curly braces",
         scope: ["meta.brace.curly"],
         settings: {
-          foreground: scheme.common.fg.alpha(0.9).hex(),
+          foreground: scheme.base.fg.alpha(0.9).hex(),
         },
       },
       {
         name: "Round braces",
         scope: ["meta.brace.round"],
         settings: {
-          foreground: scheme.common.fg.alpha(0.8).hex(),
+          foreground: scheme.base.fg.alpha(0.8).hex(),
         },
       },
       {
         name: "Square braces",
         scope: ["meta.brace.square", "brace.array.literal.square"],
         settings: {
-          foreground: scheme.common.fg.brighten(0.15).alpha(0.9).hex(),
+          foreground: scheme.base.fg.brighten(0.15).alpha(0.9).hex(),
         },
       },
       {
@@ -1164,7 +1160,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "keyword.operator.ternary",
         ],
         settings: {
-          foreground: scheme.common.ui.brighten(0.3).hex(),
+          foreground: scheme.base.ui.brighten(0.3).hex(),
         },
       },
       {
@@ -1311,7 +1307,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "punctuation.definition.tag.end.html source.js",
         ],
         settings: {
-          foreground: scheme.common.ui.brighten(0.2).hex(),
+          foreground: scheme.base.ui.brighten(0.2).hex(),
         },
       },
       {
@@ -1326,7 +1322,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         scope: ["keyword.operator.new", "keyword.other.new"],
         settings: {
           fontStyle: italics ? "italic" : undefined,
-          foreground: scheme.common.ui.brighten(0.6).fade(0.3).hex(),
+          foreground: scheme.base.ui.brighten(0.6).fade(0.3).hex(),
         },
       },
       {
@@ -1339,7 +1335,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         ],
         settings: {
           fontStyle: italics ? "italic" : undefined,
-          foreground: scheme.common.ui.brighten(0.6).fade(0.3).hex(),
+          foreground: scheme.base.ui.brighten(0.6).fade(0.3).hex(),
         },
       },
       {
@@ -1473,14 +1469,14 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "Invalid",
         scope: "invalid.illegal",
         settings: {
-          foreground: scheme.common.fg.alpha(0.8).hex(),
+          foreground: scheme.base.fg.alpha(0.8).hex(),
         },
       },
       {
         name: "Invalid Deprecated",
         scope: "invalid.deprecated",
         settings: {
-          foreground: scheme.common.fg.alpha(0.8).hex(),
+          foreground: scheme.base.fg.alpha(0.8).hex(),
         },
       },
       {
@@ -1630,7 +1626,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "Info token",
         scope: "token.info-token",
         settings: {
-          foreground: scheme.common.accent.hex(),
+          foreground: scheme.base.accent.hex(),
         },
       },
       {
@@ -1767,7 +1763,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         scope: "meta.paragraph.markdown",
         settings: {
           fontStyle: "",
-          foreground: scheme.common.fg.hex(),
+          foreground: scheme.base.fg.hex(),
         },
       },
       {
@@ -1809,14 +1805,14 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
       //   name: "Markdown code",
       //   scope: ["markup.raw"],
       //   settings: {
-      //     background: scheme.common.fg.alpha(0.02).hex(),
+      //     background: scheme.base.fg.alpha(0.02).hex(),
       //   },
       // },
       // {
       //   name: "Markdown code inline",
       //   scope: ["markup.raw.inline"],
       //   settings: {
-      //     background: scheme.common.fg.alpha(0.06).hex(),
+      //     background: scheme.base.fg.alpha(0.06).hex(),
       //   },
       // },
       {
@@ -1862,7 +1858,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "Markdown link text",
         scope: ["markup.underline.link", "string.other.link"],
         settings: {
-          foreground: scheme.common.accent.darken(0.2).hex(),
+          foreground: scheme.base.accent.darken(0.2).hex(),
         },
       },
       {
@@ -1873,14 +1869,14 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "markup.underline.link.image.markdown",
         ],
         settings: {
-          foreground: scheme.common.accent.hex(),
+          foreground: scheme.base.accent.hex(),
         },
       },
       {
         name: "Markdown lists",
         scope: "markup.list meta.paragraph.markdown",
         settings: {
-          foreground: scheme.common.fg.hex(),
+          foreground: scheme.base.fg.hex(),
         },
       },
       {
@@ -1890,7 +1886,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "beginning.punctuation.definition.list.markdown",
         ],
         settings: {
-          foreground: scheme.common.ui.hex(),
+          foreground: scheme.base.ui.hex(),
         },
       },
 
@@ -1899,7 +1895,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "CSS",
         scope: "source.css",
         settings: {
-          foreground: scheme.common.fg[brightenIfDark(type)](0.15).hex(),
+          foreground: scheme.base.fg[brightenIfDark(type)](0.15).hex(),
         },
       },
       {
@@ -1989,7 +1985,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "support.constant.property-value.css",
         ],
         settings: {
-          foreground: scheme.common.fg[darkenIfDark(type)](0.25).hex(),
+          foreground: scheme.base.fg[darkenIfDark(type)](0.25).hex(),
         },
       },
       {
@@ -2010,7 +2006,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "support.constant.color",
         ],
         settings: {
-          foreground: scheme.common.fg[darkenIfDark(type)](0.25).hex(),
+          foreground: scheme.base.fg[darkenIfDark(type)](0.25).hex(),
         },
       },
       {
@@ -2018,7 +2014,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         scope:
           "support.constant.font-name.scss, support.constant.font-name.css",
         settings: {
-          foreground: scheme.common.fg[darkenIfDark(type)](0.25).hex(),
+          foreground: scheme.base.fg[darkenIfDark(type)](0.25).hex(),
         },
       },
       {
@@ -2077,7 +2073,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
         name: "CSS @rule",
         scope: ["meta.at-rule.return variable.parameter.url.scss"],
         settings: {
-          foreground: scheme.common.fg[brightenIfDark(type)](0.5).hex(),
+          foreground: scheme.base.fg[brightenIfDark(type)](0.5).hex(),
         },
       },
       {
@@ -2234,7 +2230,7 @@ export function template(variant: SchemeName, italics: boolean): ColorTheme {
           "entity.other.attribute-name.tsx",
         ],
         settings: {
-          foreground: scheme.common.fg[brightenIfDark(type)](0.15).hex(),
+          foreground: scheme.base.fg[brightenIfDark(type)](0.15).hex(),
         },
       },
       {
@@ -2484,11 +2480,11 @@ function _preferredColor(
   ratio: number,
   ...fallbacks: Color[]
 ) {
-  if (baseColor.contrastCheck(firstChoice, ratio)) {
+  if (baseColor.hasSufficientContrastAgainst(firstChoice, ratio)) {
     return firstChoice;
   }
   for (let color of fallbacks) {
-    if (baseColor.contrastCheck(color, ratio)) {
+    if (baseColor.hasSufficientContrastAgainst(color, ratio)) {
       return color;
     }
   }
