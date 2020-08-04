@@ -3,7 +3,7 @@
   "displayName": "Slimy",
   "description": "A dark, slimy theme for your editor.",
   "license": "MIT",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "publisher": "chancestrickland",
   "scripts": {
     "build": "ts-node ./src/build.ts",
