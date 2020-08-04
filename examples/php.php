@@ -1,6 +1,9 @@
 
 <?php
-// source: https://github.com/sdras/night-owl-vscode-theme/blob/master/demo/php.php
+
+use function CoolNamespace\coolFunc;
+use CoolNamespace\Subspace\Whoa;
+
 class HelloWorldTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -20,7 +23,7 @@ class HelloWorldTest extends PHPUnit_Framework_TestCase
      */
     public function nonsenseFunc(string $str, \My_Class $cls, int $int = 10, float $flt = 5.24) : string
     {
-        return $str . ' is great';
+        return coolFunc($str) . ' is great';
     }
 
     public function setUp()
@@ -28,6 +31,10 @@ class HelloWorldTest extends PHPUnit_Framework_TestCase
         $this->pdo = new PDO($GLOBALS['db_dsn'], $GLOBALS['db_username'], $GLOBALS['db_password']);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->pdo->query("CREATE TABLE hello (what VARCHAR(50) NOT NULL)");
+
+        $this->whoa = new Whoa();
+        $this->thing = new \Thing();
+        $this->stuff = new CoolNamespace\Stuff();
     }
     public function tearDown()
     {
